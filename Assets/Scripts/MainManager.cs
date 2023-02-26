@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using TMPro;
 public class MainManager : MonoBehaviour
 {
     public Brick BrickPrefab;
@@ -11,6 +11,10 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text HighScoreText;
+    public Text playerNameText;
+
+    
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -22,6 +26,12 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //playerNameText.text = MainPersist.Instance.userName.text;
+        HighScoreText.text = $"High Score : {MainPersist.Instance.highScore}";
+        playerNameText.text = MainPersist.Instance.userName;
+        //Debug.Log(MainPersist.Instance.userName + " " + HighScoreText.text);
+        //playerNameText.text
+
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -36,10 +46,16 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+
+        
+
     }
 
     private void Update()
     {
+        
+
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -57,7 +73,10 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(1);
+
+                m_Points = 0;
+
             }
         }
     }
@@ -66,6 +85,17 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+    
+    if (m_Points > MainPersist.Instance.highScore)
+        {
+            
+            //Debug.Log ("made it");
+            MainPersist.Instance.highScore = m_Points;
+                        
+            //Name.text = MainPersist.Instance.playerName.text;
+            HighScoreText.text = $"High Score : {MainPersist.Instance.highScore}";
+        }
+    
     }
 
     public void GameOver()
@@ -73,4 +103,13 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
+
+
 }
