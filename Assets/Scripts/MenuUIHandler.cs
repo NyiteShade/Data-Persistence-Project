@@ -11,14 +11,16 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TMP_InputField myInputField;
+    
+
+    
+
 
     public void StartNew()
     {
+        MainPersist.Instance.userName = myInputField.text;
+
         SceneManager.LoadScene(1);
     }
 

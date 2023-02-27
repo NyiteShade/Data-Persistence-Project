@@ -26,11 +26,10 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //playerNameText.text = MainPersist.Instance.userName.text;
-        HighScoreText.text = $"High Score : {MainPersist.Instance.highScore}";
-        playerNameText.text = MainPersist.Instance.userName;
-        //Debug.Log(MainPersist.Instance.userName + " " + HighScoreText.text);
-        //playerNameText.text
+       
+        HighScoreText.text = "High Score (" + MainPersist.Instance.userNameHighScore + $"): { MainPersist.Instance.highScore}";
+        playerNameText.text = "Player #1: " + MainPersist.Instance.userName;
+        
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -89,11 +88,12 @@ public class MainManager : MonoBehaviour
     if (m_Points > MainPersist.Instance.highScore)
         {
             
-            //Debug.Log ("made it");
             MainPersist.Instance.highScore = m_Points;
-                        
-            //Name.text = MainPersist.Instance.playerName.text;
-            HighScoreText.text = $"High Score : {MainPersist.Instance.highScore}";
+
+            MainPersist.Instance.userNameHighScore = MainPersist.Instance.userName;
+            HighScoreText.text = "High Score (" + MainPersist.Instance.userNameHighScore + $"): { MainPersist.Instance.highScore}";
+            //HighScoreText.text = MainPersist.Instance.userNameHighScore + $" High Score: {MainPersist.Instance.highScore}";
+
         }
     
     }
