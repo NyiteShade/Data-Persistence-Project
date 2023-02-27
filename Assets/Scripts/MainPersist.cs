@@ -10,16 +10,14 @@ using UnityEngine;
 public class MainPersist : MonoBehaviour
 {
     public static MainPersist Instance;
-
-    
+        
      
     // Game variables
     public int highScore;
     public string userName;
     public string userNameHighScore;
     
-
-           
+               
     
     private void Awake()
     {
@@ -37,7 +35,6 @@ public class MainPersist : MonoBehaviour
     }
 
     
-
     private void Start()
     {
         if (MainPersist.Instance != null)
