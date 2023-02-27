@@ -102,10 +102,13 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        MainPersist.Instance.SavePlayerData();
     }
+
 
     public void MainMenu()
     {
+        MainPersist.Instance.SavePlayerData();
         SceneManager.LoadScene(0);
     }
 
